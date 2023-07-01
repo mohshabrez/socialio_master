@@ -1,0 +1,121 @@
+.middle .create-post{
+    width: 100%;
+    height: 170%;
+    -webkit-box-shadow: 2px 4px 10px 1px rgba(0,0,0,0.47);
+    box-shadow: 2px 4px 10px 1px rgba(201,201,201,0.47);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    background: var(--color-white);
+    padding:  0.4rem var(--card-padding);
+    border-radius: var(--border-radius);
+}
+
+.middle .post-wrapper{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.middle .post-wrapper .post-profile-photo{
+    display: flex;
+    align-items: center;
+}
+
+.middle .post-wrapper .post-profile-photo img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 3px solid var(--color-primary);
+    object-fit: cover;
+}
+
+.create-post input[type="text"]{
+    justify-self: start;
+    padding-left: 1rem;
+    background: transparent;
+    color: var(--color-dark);
+    margin-right: 1rem;
+    border: none;
+    background-color: transparent;
+    font-size: 18px;
+    width: 80%;
+    height: 30px;
+}
+
+.create-post input[type="text"]:focus{
+    outline: none;
+}
+
+.postbtnOptions{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.postOptions{
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+    margin-left: 80px;
+    justify-content: space-around;
+    width: 90%;
+    gap: 4rem;
+    cursor: pointer;
+}
+
+.option{
+    padding: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.option:hover{
+   cursor: pointer; 
+}
+
+.shareImgContainer{
+    margin-top: 1.5rem;
+    margin-left: 2rem;
+    padding: 0 20px 10px 20px;
+    position: relative;
+}
+
+.shareImgContainer .shareImg{
+    width: 100%;
+    object-fit: contain;
+}
+.emoji{
+    position: relative;
+    padding: 0 20px 10px 20px;
+    width: 100%;
+    top: 20px;
+    left: 70px;
+}
+.postbtn{
+    margin-top: 2rem;
+    margin-left: 4rem;
+}
+
+@media screen and (max-width: 768px){
+    .postOptions{
+        margin-left: 10px;
+        gap: 2rem;
+    }
+
+    .postbtn{
+        margin-top: 2rem;
+        margin-left: 2rem;
+        padding: 0.7rem;
+    }
+
+}

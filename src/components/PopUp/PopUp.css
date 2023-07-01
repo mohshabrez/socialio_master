@@ -1,0 +1,42 @@
+.popup {
+    position: relative;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(103, 103, 103);
+    padding: 10px;
+    border: 1px solid #5d5d5d;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    display: grid;
+    grid-template-columns: 1fr 10px 1fr;
+  }
+  
+   button {
+    margin-right: 10px;
+    background-color: rgb(103, 103, 103) ;
+    color: white;
+  }
+
+  .popupsecond{
+    position: relative;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(103, 103, 103);
+    padding: 10px;
+    border: 1px solid #5d5d5d;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  .vll{
+    content: "";
+    width: 25px;
+    height: 10%;
+    border: 1px solid rgb(200, 197, 197);
+    position: relative;
+    rotate: 90deg;
+    top: 40%;
+    left: -130%;
+}

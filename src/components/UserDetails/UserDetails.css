@@ -1,0 +1,299 @@
+.UserDesign{
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.UserDesign img{
+    width: 33rem;
+    height: 39rem;
+}
+
+.UserDesign .AvtarImgs{
+    display: flex;
+    flex-direction: row;
+    margin-top: 3rem;
+    margin-left: 4rem;
+}
+
+.UserDesign .AvtarImgs img{
+    width: 5rem;
+    height: 5rem;
+    margin: 0.8rem;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.UserDesign .AvtarImgs img:hover{
+    transform: scale(2.0);
+}
+
+.UserForm .userFormElements{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    
+}
+
+.upload-box{
+    margin-top: 1.8rem;
+    margin-left: 25rem;
+}
+
+.userFormElements label{
+    padding: 7px;
+    margin: 2px;
+    font-size: larger;
+}
+
+.userFormElements input{
+    padding: 8px;
+    width: 40%;
+}
+
+.formbtns{
+    margin-top: -11rem;
+    margin-left: 14rem;
+}
+
+.userprofile img{
+    position: relative;
+    top: -36rem;
+}
+
+.userprofile .bg-img{
+    width: 21.3rem;
+    height: 12rem;
+    margin-left: 6rem;
+}
+
+.userprofile .userImg{
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    position: absolute;
+    top: 11rem;
+    bottom: -2.5rem;
+    left: 12rem;
+    box-shadow: var(--profileShadow);
+
+}
+
+.rightarrow{
+    margin-top: 2rem;
+    margin-right: -4rem ;
+}
+
+.profileInfo h1{
+    position: relative;
+    top: -31rem;
+    left: 11rem;
+    text-transform:uppercase;
+}
+
+.profileInfo h3{
+    position: relative;
+    top: -30.3rem;
+    left: 11.3rem;
+    text-transform:uppercase;
+}
+
+.profileInfo h4{
+    position: relative;
+    top: -29.3rem;
+    left: 13.3rem;
+    text-transform:uppercase;
+}
+
+.profileInfo p{
+    position: relative;
+    top: -28.3rem;
+    left: 14rem;
+    margin-right: 20rem;
+    margin-left: -7.4rem;
+}
+
+.profileInfo .phno{
+    margin-left: -2rem;
+    margin-top: 1rem;
+}
+
+.upload-file{
+    position: relative;
+    top: 0.5rem;
+    font-size: xx-large;
+}
+
+@media screen and (min-width: 770px) and (max-width: 1024px){
+    .UserDesign img{
+        width: 25rem;
+        height: 39rem;
+    }
+    .userprofile .bg-img{
+        width: 16.3rem;
+        height: 12rem;
+        margin-left: 4.4rem;
+    }
+
+    .createProfile{
+        margin-left: -2.5rem;
+    }
+
+    .leftarrow{
+        margin-left: -1rem;
+    }
+    .AvtarImgs img{
+        width: 3rem;
+        height: 3rem;  
+    }
+    .rightarrow{
+        margin-left: -1rem;
+    }
+
+    .userprofile .userImg{
+        width: 6rem;
+        height: 6rem;
+        top: 11.5rem;
+        bottom: -1.5rem;
+        left: 9.5rem;
+    }
+
+    .profileInfo{
+        font-size: smaller;
+        line-height: 1.5rem;
+    }
+    .profileInfo h1{
+        margin-left: -1rem;
+    }
+    .profileInfo h3{
+        margin-left: -2rem;
+    }
+    .profileInfo h4{
+        margin-left: -2rem;
+    }
+    .profileInfo .phno{
+        margin-left: -4rem;
+    }
+    .UserForm label,input{
+        margin-left: 2rem;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .UserDesign{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .createProfile{
+        margin-left: 4rem;
+    }
+    .iphoneshow{
+        margin-top: 3rem;
+    }
+    .UserDesign img{
+        width: 49rem;
+        height: 44rem;
+    }
+    .userprofile .bg-img{
+        width: 31.3rem;
+        height: 18rem;
+        margin-top: -4rem;
+        margin-left: 9rem;
+    }
+    
+    .userprofile .userImg{
+        width: 10rem;
+        height: 10rem;
+        top: 59.5rem;
+        left: 19.5rem;
+    }
+    .profileInfo{
+        margin-top: 1rem;
+        margin-left: 10rem;
+        line-height: 1.5rem;
+    }
+    .profileInfo h1{
+        margin-left: -0.2rem;
+    }
+    .profileInfo h3{
+        margin-left: -2rem;
+    }
+    .profileInfo h4{
+        margin-left: -1rem;
+    }
+    .profileInfo .phno{
+        margin-left: -4rem;
+    }
+}
+
+@media screen and (min-width: 325px) and (max-width: 760px){
+    .UserDesign{
+        display: flex;
+        flex-direction: column-reverse;
+        width: 109%;
+    }
+
+    .iphoneshow{
+        display: none;
+    }
+    .AvtarImgs a {
+        margin-left: -5.2rem;
+    }
+
+    .UserDesign .AvtarImgs img{
+        width: 4rem;
+        height: 4rem;
+        margin: 0.2rem;
+    }
+
+    .leftarrow{
+        margin-top: -1rem;
+    }
+    .rightarrow{
+       position: relative;
+       top: -1rem;
+       right: -5rem;
+    }
+    .upload-file{
+        margin-left: -10rem;
+    }
+    .upload-label{
+        margin-left: -10rem;
+    }
+    .formbtns{
+      display: flex;
+      flex-direction: row;
+      margin-left: 2.5rem;
+    }
+    
+    .iphoneshow img{
+        width: 109%;
+    }
+    .userprofile .bg-img{
+        display: none;
+    }
+    .userprofile .userImg{
+        width: 7rem;
+        height: 7rem;
+        top: 59.5rem;
+        left: 12.5rem;
+    }
+    .profileInfo h1{
+        margin-left: -8.5rem;
+    }
+    .profileInfo h3{
+        margin-left: -9.5rem;
+    }
+    .profileInfo h4{
+        margin-left: -9.5rem;
+    }
+    .profileInfo .phno{
+        margin-left: -11.5rem;
+    }
+    .profileInfo p{
+        margin-left: -15rem;
+    }
+
+}

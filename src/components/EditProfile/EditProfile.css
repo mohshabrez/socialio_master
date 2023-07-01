@@ -1,0 +1,83 @@
+.editProfile{
+    display: grid;
+    grid-template-columns: 300px 1fr;
+}
+
+.editProfile .EditImg img{
+    width: 10rem;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    border: 3px solid var(--color-primary);
+    border-radius: 50%;
+    margin-left: 23rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.editProfile .EditForm .formElements{
+    display: flex;
+    flex-direction: column;
+    margin-left: 8rem;
+}
+
+.formElements label{
+    padding: 8px;
+    margin: 6px;
+    font-size: larger;
+}
+
+.formElements input{
+    padding: 6px;
+    width: 70%;
+    margin-left: 1.5rem;
+}
+
+.formElements .form-btns{
+    display: flex;
+    flex-direction: row;
+    margin: 2rem;
+}
+
+.form-btns button {
+    margin-left: 4rem;
+    margin-right: 2rem;
+    font-size: x-large;
+}
+
+.editspan{
+    background-color: hsl(252, 75%, 60%);
+    border-radius: 50%;
+    font-size: xx-large;
+    position: relative;
+    left: 5.2rem;
+    top: -4.5rem;
+}
+
+@media screen and (max-width: 768px){
+    .editProfile .EditImg img{
+        margin-left: 14rem;
+    }
+    .editspan{
+        position: relative;
+        left: -3.3rem;
+        top: -4.5rem;
+    }
+
+}
+
+@media screen and (min-width: 325px) and (max-width: 760px){ 
+    .editProfile .EditForm .formElements{
+        margin-left: -6rem;
+    }
+    .editProfile .EditImg img{
+        margin-left: 1rem;
+    }
+    .editspan{
+        position: relative;
+        left: -16.3rem;
+        top: -4.5rem;
+    }
+    .form-btns button {
+        margin-left: 2rem;
+    }
+}

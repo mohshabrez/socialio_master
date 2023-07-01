@@ -1,0 +1,44 @@
+.right{
+    height: max-content;
+    position: sticky;
+    top: var(--sticky-top-right);
+    bottom: 0;
+}
+
+.right .followersSection{
+  margin-top: 1rem;
+}
+
+.right .followersSection h3{
+    margin: 0.4rem;
+}
+
+.right .messages{
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+}
+
+.right .messages .heading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.right .messages span{
+    font-size: 1.2rem;
+}
+
+.right .messages .search-bar{
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 768px){
+    .right .followersSection h3{
+      font-size: medium;
+      margin-left: 1rem;
+    }
+}
+

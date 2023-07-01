@@ -1,0 +1,78 @@
+.profilePage{
+    display: grid;
+    grid-template-rows: 1fr 2fr 11fr;
+}
+
+.profilePage .profileImg {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 2rem;
+    justify-content: space-between;
+}
+
+.profilePage .profileImg .profile-img{
+    width: 10rem;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    border: 3px solid var(--color-primary);
+    border-radius: 50%;
+    margin-left: 8rem;
+    margin-top: 1rem;
+}
+
+.profilePage .profileImg .profileInfo{
+    display: flex;
+    flex-direction: row;
+    margin: 1rem;
+}
+
+.profileInfo div{
+   margin-left: 10rem;
+}
+
+.profileInfo p {
+    display: block;
+}
+
+.profileInfo .postsCount{
+    margin-left: 11rem;
+}
+
+.About {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 32rem;
+}
+
+.About .profile-about {
+    margin-top: -0.4rem;
+}
+
+.About .profile-about p{
+    line-height: 2rem;
+}
+
+
+.profile-btns button{
+    margin-right: 6rem;
+    position: relative;
+}
+
+.profile-posts{
+    margin-left: 10rem;
+    margin-right: 10rem;
+}
+
+@media screen and (max-width: 768px){
+    .profile-btns .btns-div button{
+       margin: 0.4rem;
+       padding: 0.6rem;
+    }
+    .profile-posts{
+        margin-left: 12rem;
+        margin-right: -10rem;
+    }
+
+}

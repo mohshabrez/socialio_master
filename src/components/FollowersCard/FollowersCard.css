@@ -1,0 +1,64 @@
+.FollowersCard{
+    width: 100%;
+    border-radius: 0.7rem;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    margin-top: 1rem;
+}
+
+.FollowersCard h3{
+    margin: 10px;
+}
+
+.follower{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.follower > div{
+    display: flex;
+    gap: 10px;
+}
+
+.followerImg{
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 50%;
+}
+
+.name{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    font-size: smaller;
+}
+
+.name > span:nth-of-type(1){
+    font-weight: bold;
+}
+
+.follow-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    background: var(--buttonBg);
+    transition: all 100ms ease-out ;
+    height: 2rem;
+    padding-left: 20px;
+    padding-right: 20px ;
+}
+
+.follow-btn:hover{
+    cursor: pointer;
+    color: var(--orange);
+    background: transparent;
+    border: 2px solid var(--orange);
+}

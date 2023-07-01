@@ -1,0 +1,56 @@
+.category{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.category h6{
+    width: 100%;
+    text-align: center;
+    border-bottom: 4px solid var(--color-light);
+    padding-bottom: 0.5rem ;
+    font-size: 0.85rem;
+}
+
+.category .active{
+    border-color: var(--color-dark);
+}
+
+.message-requests{
+    color: var(--color-primary);
+}
+
+.message{
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: start;
+}
+
+.message .profile-photo{
+    position: relative;
+    overflow: visible;
+}
+
+.message:last-child{
+    margin: 0;
+}
+
+.profile-photo img{
+    border-radius: 50%;
+}
+
+.message p{
+    font-size: 0.8rem;
+}
+
+.message .profile-photo .active{
+    width: 0.8rem;
+    height:0.8rem;
+    border-radius: 50%;
+    border: 3px solid var(--color-white);
+    background: var(--color-success);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

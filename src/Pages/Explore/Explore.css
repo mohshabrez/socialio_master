@@ -1,0 +1,17 @@
+.ExplorePage{
+    display: grid;
+    grid-template-columns: 300px 1fr;
+}
+
+.ExplorePage .container{
+    margin-left: 2rem;
+}
+
+.ExplorePage .bookmarks{
+    display: flex;
+    flex-direction: row;
+}
+
+.ExplorePage .explores{
+    margin-right: 6rem;
+}

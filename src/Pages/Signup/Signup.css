@@ -1,0 +1,201 @@
+.formLoginData{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+  }
+  .formLoginData div{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    list-style-type: none;
+    line-height: 30px;
+    overflow-wrap: break-word;
+    font-size: larger;
+    padding: 5px;
+  }
+  
+  .formLoginData div input{
+    padding: 7px;
+    border-radius: 20px;
+    width: 250px;
+    background-color: transparent;
+    color: rgb(0, 0, 0);
+  }
+  
+  .formLoginData div input:hover{
+    border: 2px solid var(--color-primary);
+  }
+
+  .formLoginData div input:focus{
+    width: 100%;
+  }
+  
+  .formLoginData label{
+    color: rgb(12, 12, 12);
+    margin-bottom: 10px;
+    }
+  
+    .formLoginData span{
+      position: relative;
+      left: 230px;
+      color: var(--color-primary);
+    }
+  
+  .formLoginData button{
+    width: max-content;
+    padding: 8px;
+    margin-top: 2px;
+    margin-left: 8px;
+    border-radius: 8px;
+    background-color:var(--color-primary) ;
+    color: white;
+    font-size: medium;
+    cursor: pointer;
+  }
+  
+  .signUp{
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+    overflow: hidden;
+    overflow-x: hidden;
+    background-color:#F7F7F7;
+  }
+  
+  .singuplogo .iphone{
+    width: 45rem;
+    height: 35rem;
+  }
+
+  .singuplogo .insideIphone{
+    position: relative;
+    width: 20rem;
+  }
+
+  .singupInfo{
+    position: relative;
+    top: -6rem;
+    left: 10rem;
+  }
+
+  .image-line{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: -300px;
+  }
+  .profileImg{
+    display: flex;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+  .upload-box{
+    margin-left: 150px;
+  }
+
+  .signInLink{
+    color: var(--color-primary);
+  }
+  
+  .signupForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 22rem;
+    height: 38rem;
+    margin-top: 30px;
+    margin-left: 40px;
+    transition: all 0.4s ease;
+    opacity: 0.8;
+    font-size: smaller;
+    box-shadow: rgba(137, 13, 213, 0.2) 0px 2px 5px;
+  }
+
+  .signupForm h1{
+    color: var(--color-primary);
+    margin-left: -2rem;
+  }
+
+  .error{
+    color: red;
+    position: relative;
+    margin-left: -28rem;
+    margin-top: -2px;
+    font-size: medium;
+  }
+  
+  @media screen and (min-width: 770px) and (max-width: 1024px){
+    .singuplogo .iphone{
+      width: 38rem;
+      height: 35rem;
+    }
+  }
+
+  @media screen and (max-width: 768px){
+    .signUp{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      justify-content: center;
+    }
+    .singuplogo .iphone{
+      width: 28rem;
+      height: 35rem;
+    }
+    .singupInfo{
+      position: relative;
+      top: -6rem;
+      left: 2rem;
+    }
+    .signupForm{
+      width: 20rem;
+      margin-left: 7px;
+      box-shadow: none;
+    }
+    .formLoginData div input:hover{
+      border: 2px solid var(--color-primary);
+    }
+  
+    .formLoginData div input:focus{
+      width: 100%;
+    }
+   
+  }
+
+  @media screen and (min-width: 325px) and (max-width: 760px){
+    .signUp{
+      display: flex;
+      flex-direction: column;
+    }
+    .singuplogo .iphone{
+      width: 28rem;
+      height: 18rem;
+      margin-left: -3rem;
+    }
+    .singupInfo{
+      position: relative;
+      top: 0.1rem;
+      left: 0.1rem;
+    }
+    .singupInfo h1{
+      text-align: center;
+    }
+    .singupInfo p{
+      font-size: smaller;
+      text-align: center;
+    }
+
+    .signupForm{
+      margin-left: 2rem;
+      box-shadow: none;
+    }
+    .formLoginData div input:hover{
+      border: 2px solid var(--color-primary);
+    }
+  
+    .formLoginData div input:focus{
+      width: 100%;
+    }
+   
+  }

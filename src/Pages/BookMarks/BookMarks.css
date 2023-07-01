@@ -1,0 +1,72 @@
+.BookMarksPage{
+    display: grid;
+    grid-template-columns: 300px 1fr;
+}
+
+.BookMarksPage .container{
+    margin-left: 2rem;
+}
+
+.BookMarksPage .bookmarks{
+    display: flex;
+    flex-direction: row;
+}
+
+.bookmarks{
+  border: 1px solid rgb(187, 187, 187);
+  margin-left: -2rem;
+  background-color: var(--color-white);
+  border-radius: 10px;
+  margin-top: 0.2rem;
+  height: fit-content;
+  cursor: pointer;
+}
+
+.bookmarks:hover{
+    background:  var(--color-light)
+}
+
+.bookmarks div:last-child {
+   margin-top: auto;
+  }
+
+.bookmarks .bookmarksProfile{
+    width: 2.5rem;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    border: 3px solid var(--color-primary);
+    border-radius: 50%;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.bookmarksDetails{
+    display: grid;
+    grid-template-rows: 0.3fr 1fr;
+    margin: 1rem;
+}
+
+.bookmarksDetails h5{
+    margin-right: -20rem;
+}
+
+.bookmarks .postImg {
+    width: 2.8rem;
+    height: 4.3rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-left: 32rem;
+}
+
+@media screen and (min-width: 325px) and (max-width: 760px){ 
+   
+    .bookmarksTab{
+        margin-left: -8rem;
+    }
+
+}

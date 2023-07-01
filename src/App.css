@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+
+:root{
+    --yellow: #f5c32c;
+    --orange: #fca61f;
+    --black: #242d49;
+    --gray: rgba(26, 45, 73, 0.65);
+    --profile-shadow: 0px 4px 17px 2px rgba(0, 0, 0, 0.25);
+    --hrColor: #cfcdcd;
+    --cardColor: rgba(255, 255, 255, 0.64);
+    --buttonBg: linear-gradient(98.63deg, #f9a225 0%, #f95f35 100%);
+    --inputColor: rgba(40, 52, 62, 0.07);
+    --photo: #4CB256;
+    --video: #4A4EB7;
+    --location: #EF5757;
+    --schedule: #E1AE4A;
+    --color-dark: hsl(252,30%,17%);
+    --color-white: hsl(252, 30%, 100%);
+    --color-light: hsl(252, 30%, 95%);
+    --color-gray: hsl(252, 15%, 65%);
+    --color-primary: hsl(252, 75%, 60%);
+    --color-secondary: hsl(252, 100%, 90%);
+    --color-success: hsl(120, 95%, 65%);
+    --color-danger: hsl(0, 95%, 65%);
+    --color-black: hsl(252, 30%, 10%);
+
+    --border-radius: 2rem;
+    --card-border-radius: 1rem;
+    --btn-padding: 0.6rem 2rem;
+    --search-padding: 0.6rem 1rem;
+    --card-padding: 1rem;
+    --sticky-top-left: 5.4rem;
+    --sticky-top-right: -18rem;
+}
+
+*, *::before, *::after{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    border: none;
+}
+
+.container{
+    width: 95%;
+    margin: 0 auto;
+}
+
+.profile-photo{
+    width: 2.7rem;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+}
+
+img{
+    display: block;
+    width: 100%;
+}
+
+.btn{
+    display: inline-block;
+    padding: var(--btn-padding);
+    font-weight: 500;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 300ms ease;
+    font-size: 0.9rem;
+}
+
+.btn:hover{
+    opacity: 0.8;
+}
+
+.btn-primary{
+    background: var(--buttonBg);
+    color: white;
+
+}
+
+.text-bold{
+    font-weight: 500;
+}
+
+.text-muted{
+    color: var(--color-gray);
+}
+
+body{
+    font-family: "Poppins", sans-serif;
+    color: var(--color-dark);
+    background: var(--color-light) ;
+    overflow-x: hidden ;
+}
+
+/* @media screen and (max-width: 1200px){
+    .container{
+        width: 96%;
+    }
+    main .container {
+        grid-template-columns: 5rem auto 30vw;
+        gap: 1rem;
+    }
+    .left{
+        width: 5rem;
+        z-index: 5;
+    }
+    main .container .left .profile{
+        display: none;
+    }
+    .sidebar h3{
+        display: none;
+    }
+    .left .btn{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 992px){
+    nav .search-bar{
+        display: none;
+    }
+    main .container{
+        grid-template-columns: 0 auto 5rem;
+    }
+    main .container .left{
+        grid-column: 3/4;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+    }
+    .notification-popup{
+        position: absolute;
+        left: -20rem;
+        width: 20rem;
+    }
+    .notification-popup::before{
+        display: absolute;
+        top: 1.3rem;
+        left: calc(20rem - 0.6rem);
+        display: block;
+    }
+
+    .sidebar > div h3{
+        display: none;
+    }
+
+    main .container .middle{
+        grid-column: 1/3;
+    }
+
+    main .container .right{
+        display: none;
+    }
+} */
