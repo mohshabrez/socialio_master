@@ -10,6 +10,7 @@ import { Timestamp, addDoc, arrayUnion, collection, doc, serverTimestamp, update
 import { UseMedia } from "../../Context/MediaContext";
 import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
+import { toast } from "react-toastify";
 
 
 export function MiddleNav(){
@@ -116,10 +117,12 @@ export function MiddleNav(){
        }
         setInput("");
         setImg(null);
+        toast.success("Post Successfull")
     }
 
     const removeImage = () => {
         setImg(null)
+        toast.info("Image Removed")
     }
 
     const handleKey = (e) => {

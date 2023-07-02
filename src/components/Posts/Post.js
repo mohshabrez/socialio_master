@@ -11,6 +11,8 @@ import { v4 as uuid } from 'uuid';
 import heartFill from "../../Images/heartfill.png"
 import { Link } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { toast } from "react-toastify";
+import Picker from '@emoji-mart/react'
 
 export function Post({post}){
     const [editing, setEditing] = useState(false);
@@ -106,7 +108,7 @@ export function Post({post}){
         })
         setCommentVisible(false)
         setCommentInput('')
-
+        toast.success("Commented Successfully")
     }
 
  
@@ -119,7 +121,7 @@ export function Post({post}){
             await updateDoc(doc(db, "posts", post.id), {
                 likes: Likes.length - 1
               });
-       
+              toast.info("UnLike the Post")
         }
         else{
             await setDoc(doc(db, "posts", post.id , "likes", currentUser.uid), {
@@ -132,13 +134,14 @@ export function Post({post}){
             await updateDoc(doc(db, "posts", post.id), {
                 likes: Likes.length+1
               });
-       
+              toast.success("Liked the Post")
         }
     }
 
     const BookMark = async () => {
         if(BookMarked){
             await deleteDoc(doc(db, "users", currentUser.uid, "BookMarks", post.id))
+            toast.error("BookMark Removed")
         }
         else{
             await setDoc(doc(db, "users", currentUser.uid, "BookMarks", post.id),{
@@ -150,6 +153,7 @@ export function Post({post}){
                imgValue: getData?.data?.imgValue ? getData?.data?.imgValue : "",
                timestamp: serverTimestamp()
             })
+            toast.info("BookMark Added")
         }
        
     }
@@ -174,6 +178,7 @@ export function Post({post}){
     const handleDelete = async () => {
         try{
             await deleteDoc(doc(db, "posts",  post.id))
+            toast.error("Deleted The Post")
         }
          catch(e){
             console.log(e)
@@ -276,6 +281,13 @@ export function Post({post}){
         e.code === "Enter" && handleSubmit()
     }
 
+    const addEmoji = (e) => {
+        let sym = e.unified.split("-");
+        let codesArray = [];
+        sym.forEach((el) => codesArray.push("0x" + el));
+        let emoji = String.fromCodePoint(...codesArray);
+        setInput(input + emoji);
+      };
     return(
         <div className="feed">
         <div className="head">
@@ -295,7 +307,7 @@ export function Post({post}){
             </a>
         </div>
         
-        <div className="postinputline">{post?.data?.input}</div>
+        <div className="postinputline"><p style={{fontSize:"1.5rem"}}>{post?.data?.input}</p></div>
         {post?.data?.img && (
                 <div className="photo">
                 <img src={post?.data?.img} alt="feedImg"/>
@@ -347,12 +359,13 @@ export function Post({post}){
             position: "fixed",
             top: 0,
             left: 0,
-            width: "100%",
+            width: "70%",
             height: "100%",
             backgroundColor: "rgba(0, 0, 0, 0.5)",
             display: "flex",
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
+            marginLeft:"5rem"
           }}
         >
           <div
@@ -373,8 +386,8 @@ export function Post({post}){
                 </div>
                 {img && (
                 <div className="shareImgContainer">
-            <       img src={URL.createObjectURL(img)} alt="" className="shareImg" />
-                    <span class="material-symbols-outlined" onClick={removeImage} style={{position:"absolute", top:"0", right:"20px", backgroundColor:"white",borderRadius:"50%",cursor:"pointer"}}>cancel</span>
+            <       img src={URL.createObjectURL(img)} alt="" className="shareImg" style={{width:"30%"}} />
+                    <span class="material-symbols-outlined" onClick={removeImage} style={{position:"absolute", top:"0", right:"32rem", backgroundColor:"white",borderRadius:"50%",cursor:"pointer"}}>cancel</span>
                 </div>
                 )}
                 <div className="postbtnOptions">
@@ -389,7 +402,7 @@ export function Post({post}){
             </div>
             {showEmojis && (
           <div className="emoji">
-            {/* <Picker onEmojiSelect={addEmoji} /> */}
+            <Picker onEmojiSelect={addEmoji} />
           </div>
         )}
             </div>

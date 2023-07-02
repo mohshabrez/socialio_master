@@ -6,6 +6,7 @@ import TimeAgo from 'timeago-react';
 import { UseMedia } from "../../Context/MediaContext";
 import { UseBook } from "../../Context/BookContext";
 import { PopUp } from "../PopUp/PopUp";
+import { toast } from "react-toastify";
 
 
 export function UsersPost({post}){
@@ -156,6 +157,7 @@ export function UsersPost({post}){
     const handleDelete = async () => {
         try{
             await deleteDoc(doc(db, "posts",  post.id))
+            toast("Deleted the post")
         }
          catch(e){
             console.log(e)

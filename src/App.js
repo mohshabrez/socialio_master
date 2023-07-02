@@ -11,7 +11,8 @@ import { Editprofile } from './components/EditProfile/EditProfile';
 import { BookMarksPage } from './Pages/BookMarks/BookMarksPage';
 import { Explore } from './Pages/Explore/Explore';
 import { UserDetails } from './components/UserDetails/UserDetails';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -32,6 +33,15 @@ function App() {
           <Route path="/Explore" element={<RequiresAuth><Explore/></RequiresAuth>}/> 
         </Route>
       </Routes>
+      <ToastContainer position='bottom-right'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover/>
     </div>
   );
 }

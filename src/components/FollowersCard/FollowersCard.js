@@ -4,6 +4,7 @@ import { UseMedia } from "../../Context/MediaContext"
 import {UseAuth} from "../../Context/AuthContext"
 import { addDoc, collection, deleteDoc, doc, onSnapshot, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
+import { toast } from "react-toastify";
 
 
 export function FollowersCard({user}){
@@ -45,6 +46,7 @@ export function FollowersCard({user}){
               await updateDoc(doc(db, "users", user.id), {
                 followers : followers.length-1
               });
+              toast.error(`You Unfollowed ${user?.data?.displayName}`)
         }
         else{
             await setDoc(doc(db, "users", currentUser.uid, "Followers", user.id),{
@@ -52,7 +54,7 @@ export function FollowersCard({user}){
                 displayName: user?.data?.displayName,
                 email: user?.data?.email,
                 photoURL: user?.data?.photoURL ? user?.data?.photoURL : "" ,
-                imgValue: getData?.data?.imgValue,
+                imgValue: getData?.data?.imgValue ? getData?.data?.imgValue : "" ,
             })
             await updateDoc(doc(db, "users", currentUser.uid), {
                 following : followers.length+1
@@ -60,6 +62,7 @@ export function FollowersCard({user}){
               await updateDoc(doc(db, "users", user.id), {
                 followers : followers.length+1
               });
+              toast.success(`You Followed ${user?.data?.displayName}`)
         }
 
        
