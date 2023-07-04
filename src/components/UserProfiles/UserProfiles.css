@@ -1,0 +1,39 @@
+.userProf{
+    display: grid;
+    grid-template-columns: 300px 1fr;
+}
+.userdata{
+    display: flex;
+    flex-direction: column;
+    margin-left: -5rem;
+}
+.userProfile-img img{
+    border-radius: 50%;
+    width: 15rem;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    border: 5px solid var(--color-primary);
+    margin-left: 18rem;
+}
+.userProfileInfo{
+    display: grid;
+    grid-template-columns: 12rem 12rem 12rem;
+    margin-left: 12rem;
+    margin-top: 2rem;
+}
+.userProfileAbout{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    margin-left: 12rem;
+    margin-top: 1rem;
+}
+.userProfile-about{
+    line-height: 2rem;
+}
+.btns-div{
+    margin-top: 1rem;
+    margin-left: -2rem;
+}
+.btns-div button{
+    margin-left: 2rem;
+}

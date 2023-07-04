@@ -53,6 +53,37 @@
     top: -4.5rem;
 }
 
+.errorImg{
+    margin-top: -2.5rem;
+    margin-left: -6rem;
+    margin-bottom: 2rem;
+    color: red;
+    width: 60%;
+    box-shadow: 0 0 10px orange;
+}
+
+ .AvtarImgs{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2rem;
+    margin-left: 13rem;
+    margin-bottom: 2rem;
+}
+
+.AvtarImgs img{
+    width: 5rem;
+    height: 5rem;
+    margin: 0.8rem;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.AvtarImgs img:hover{
+    transform: scale(2.0);
+}
+
+
+
 @media screen and (max-width: 768px){
     .editProfile .EditImg img{
         margin-left: 14rem;

@@ -2,11 +2,8 @@ import { UseAuth } from "../../Context/AuthContext";
 import "./PopUp.css"
 import React, { useState } from 'react';
 
-export function PopUp({onEdit, onDelete, mypost}){
+export function PopUp({onEdit, onDelete, mypost, unFollow}){
     const {currentUser} = UseAuth()
-   
-
-    
 
     return (
        <>
@@ -17,7 +14,7 @@ export function PopUp({onEdit, onDelete, mypost}){
         <button onClick={onDelete}>Delete</button>
       </div>
        ) : (<div className="popupsecond">
-       <button onClick={onEdit}>UnFollow</button>
+       <button onClick={unFollow}>UnFollow</button>
      </div>)}
        </>
         

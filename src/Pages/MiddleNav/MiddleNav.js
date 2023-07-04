@@ -135,7 +135,7 @@ export function MiddleNav(){
             <div className="create-post">
               <div className="post-wrapper">
                 <div className="post-profile-photo">
-                    { getData && <img src={currentUser.photoURL ?  currentUser.photoURL : Images[getData.data.imgValue]} alt="create-pic"/>}                    <input type="text"  placeholder={"What's happening  " + currentUser.displayName + "?"}  id="create-post" value={input} onChange={(e)=> setInput(e.target.value)} onKeyDown={handleKey}/>
+                    { getData && <img src={getData?.data?.photoURL?  getData?.data?.photoURL : Images[getData.data.imgValue]} alt="create-pic"/>}                    <input type="text"  placeholder={"What's happening  " + currentUser.displayName + "?"}  id="create-post" value={input} onChange={(e)=> setInput(e.target.value)} onKeyDown={handleKey}/>
                 </div>
                 {img && (
                 <div className="shareImgContainer">

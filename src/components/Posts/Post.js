@@ -9,14 +9,13 @@ import { UseBook } from "../../Context/BookContext";
 import { PopUp } from "../PopUp/PopUp";
 import { v4 as uuid } from 'uuid';
 import heartFill from "../../Images/heartfill.png"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { toast } from "react-toastify";
 import Picker from '@emoji-mart/react'
 
 export function Post({post}){
     const [editing, setEditing] = useState(false);
-    const [editedContent, setEditedContent] = useState();
     const {currentUser} = UseAuth();
     const {BookMarks, setBookMarks} = UseBook()
     const [Likes, setLikes] = useState([])
@@ -29,10 +28,12 @@ export function Post({post}){
     const [mypost, setMyPost] = useState(false)
     const {stories, posts} = UseMedia()
     const[img, setImg] = useState(null)
-    const[likesArray, setLikesArray] = useState([])
     const[showEmojis,setShowEmojis] = useState(false)
     const [input, setInput] = useState('');
+    const [editInput, setEditInput] = useState(post?.data?.input)
     const[error, setError] = useState(false)
+    const navigate = useNavigate()
+   
 
     const Images=["https://lens-storage.storage.googleapis.com/png/70da173dbc834b4bb6763d61497a247c", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjZctKcm1L8v17s92MaieFVgB8fs16dIWM57dcJFb8pA&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEMnPDKLXy-SPWsPheQfLol1dK8AbOB6zwG0L13lZ2Vg&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXFtTjGVfyndqQs4bXLI6irHKgXVByWQfogeq700rVsg&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2TyiRRZgppjo5cmgjSqiJq6zAO_X88bctaHC0VYAhxQ&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9ztZfLq32Qk3F5MCJK4FWSpqREyMbAzE4OKg6Iikowg&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPAfuGQCQ44JeIlccF0_BRXUcqA9neAEUToljuGD8NVg&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc3NeAIgnxIUPIhVmzmi9bti2cTxONWqsWZAzLCOpMMA&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKZlYHQHmTr290K_-x2omMfV_Xl4uZHtO7gOgrxKM5pw&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV6E1T3Nv6zcK3ZTir7i9OOvlm179rgbaqURNabbX81g&usqp=CAU&ec=48665701",  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3FrjxE6yQQQKp_hLvT_XV39lImu_FBkVqFjTPpKPkeg&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUU8CwvrQcAynZHVYTyCcQLVZkaXX921DGp0BRIKu1vA&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTOLYKINKxHLgMC0KQYHSy9ozTUas4GlH-n1J93EsS2w&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjvv7ziu1NxIkQ5WaD1PhtfbaMK18Vicl766BulAg10Q&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRq4kY52aeKW0wk-eX8HZePpNb73jn9z4s6WKZn6ON8Rg&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYPKNBy8z42-70ZRp_pcRtKUqvVFrfiaXnhg-1lq6WyQ&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlXEOQQWYTmsqOwMCjKL--2xoPBaDO5F6b6oV3b3pxqA&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl5keXx43rQwBatVYjCVkBJQpdQaVCkl3MdDywtCSxBw&usqp=CAU&ec=48665701"]
     
@@ -40,7 +41,7 @@ export function Post({post}){
 
     const sortedComments = comment.sort((a,b) => b.data.timestamp - a.data.timestamp )
 
-    // console.log(Likes.sort((a,b) => a.length - b.length))
+    
 
     useEffect(()=>{
         const unSub = onSnapshot(collection(db, "posts", post.id, "likes"),(snapshot) => setLikes(snapshot.docs.map((snapshot)=> ({
@@ -111,10 +112,6 @@ export function Post({post}){
         toast.success("Commented Successfully")
     }
 
- 
-
-    // const tagList = post.tags.map((tag) =>{return (<>{tag}</>)})
-
     const likePost = async() => {
         if(liked){
             await deleteDoc(doc(db, "posts", post.id , "likes", currentUser.uid))
@@ -163,14 +160,10 @@ export function Post({post}){
         setPopupVisible(!isPopupVisible);
       };
 
-      const handleEdit = () => {
+      const handleEdit = (post) => {
         setPopupVisible(false)
         setEditing(true)
     }
-    const handleSaveClick = () => {
-        // onSave(postId, editedContent);
-        setEditing(false);
-      };
       const handlePost =() =>{
         setEditing(false)
       }
@@ -221,7 +214,7 @@ export function Post({post}){
                         uid: currentUser.uid,
                         photoURL: currentUser.photoURL,
                         displayName: currentUser.displayName,
-                        input,
+                        input: editInput,
                         img: downloadURL,
                         imgValue: getData?.data?.imgValue ? getData?.data?.imgValue : "",
                         timestamp: serverTimestamp(),
@@ -233,7 +226,7 @@ export function Post({post}){
                             uid: currentUser.uid,
                             photoURL: currentUser.photoURL,
                             displayName: currentUser.displayName,
-                            input,
+                            input: editInput,
                             img: downloadURL,
                             imgValue: getData?.data?.imgValue ? getData?.data?.imgValue : "",
                             timestamp: Timestamp.now(),
@@ -254,7 +247,7 @@ export function Post({post}){
              uid: currentUser.uid,
              photoURL: currentUser.photoURL,
              displayName: currentUser.displayName,
-             input,
+             input: editInput,
              imgValue: getData?.data?.imgValue ? getData?.data?.imgValue : "",
              timestamp: serverTimestamp(),
              likes: 1
@@ -265,7 +258,7 @@ export function Post({post}){
                  uid: currentUser.uid,
                  photoURL: currentUser.photoURL,
                  displayName: currentUser.displayName,
-                 input,
+                 input: editInput,
                  imgValue: getData?.data?.imgValue ? getData?.data?.imgValue : "",
                  timestamp: Timestamp.now(),
                  likes: 1
@@ -281,28 +274,39 @@ export function Post({post}){
         e.code === "Enter" && handleSubmit()
     }
 
+    const handleUnfollow = (e) => {
+
+    }
+
     const addEmoji = (e) => {
         let sym = e.unified.split("-");
         let codesArray = [];
         sym.forEach((el) => codesArray.push("0x" + el));
         let emoji = String.fromCodePoint(...codesArray);
         setInput(input + emoji);
+        setEditInput(editInput + emoji)
       };
+    
+    const handleProfile = () => {
+      navigate("/UserProfiles", {state:{post}})
+    }
+
+
     return(
         <div className="feed">
         <div className="head">
             <div className="user">
                 <div className="profile-photo">
-                    <Link to="/ProfilePage"><img  src={post?.data?.photoURL ? post?.data?.photoURL : Images[post?.data?.imgValue]} alt="feed-img"/></Link> 
+                    <label onClick={handleProfile}><img  src={post?.data?.photoURL ? post?.data?.photoURL : Images[post?.data?.imgValue]} alt="feed-img"/></label> 
                 </div>
                 <div className="ingo">
-                <Link to="/ProfilePage"><h3>{post?.data?.displayName}</h3></Link>
+                <label to="/ProfilePage"><h3>{post?.data?.displayName}</h3></label>
                     <small>India,<TimeAgo datetime={new Date(post?.data?.timestamp?.toDate()).toLocaleString()} locale='en'/></small>
                 </div>
             </div>
             <a className="edit"><span class="material-symbols-outlined" onClick={handleButtonClick}>more_horiz</span>
             {isPopupVisible && (
-            <PopUp onEdit={() =>handleEdit()} onDelete={(e) => handleDelete()} mypost={mypost} />
+            <PopUp onEdit={() =>handleEdit(post)} onDelete={(e) => handleDelete()} unFollow={(e)=> handleUnfollow()} mypost={mypost} />
             )}
             </a>
         </div>
@@ -378,15 +382,14 @@ export function Post({post}){
             <h1>Edit Post</h1>
             <span class="material-symbols-outlined" onClick={handlePost} style={{marginLeft:"40rem", backgroundColor:"white",borderRadius:"50%",cursor:"pointer"}}>cancel</span>
             <div className="create-post">
-           
               <div className="post-wrapper">
                 <div className="post-profile-photo">
                     { getData && <img src={currentUser.photoURL ?  currentUser.photoURL : Images[getData.data.imgValue]} alt="create-pic"/>}                    
-                    <input type="text"  placeholder={"What's happening  " + currentUser.displayName + "?"}  id="create-post" value={input} onChange={(e)=> setInput(e.target.value)} onKeyDown={handleKey}/>
+                    <input type="text"  placeholder={"What's happening  " + currentUser.displayName + "?"}  id="create-post" value={editInput} onChange={(e)=> setEditInput(e.target.value)} onKeyDown={handleKey}/>
                 </div>
                 {img && (
                 <div className="shareImgContainer">
-            <       img src={URL.createObjectURL(img)} alt="" className="shareImg" style={{width:"30%"}} />
+                <img src={URL.createObjectURL(img)} alt="" className="shareImg" style={{width:"30%"}} />
                     <span class="material-symbols-outlined" onClick={removeImage} style={{position:"absolute", top:"0", right:"32rem", backgroundColor:"white",borderRadius:"50%",cursor:"pointer"}}>cancel</span>
                 </div>
                 )}

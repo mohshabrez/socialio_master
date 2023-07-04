@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react"
 import { UseAuth } from "../../Context/AuthContext"
-import { addDoc, arrayUnion, collection, deleteDoc, doc, onSnapshot, serverTimestamp, setDoc, updateDoc } from "firebase/firestore"
-import { db } from "../../config/firebase"
+import { Timestamp, addDoc, arrayUnion, collection, deleteDoc, doc, onSnapshot, serverTimestamp, setDoc, updateDoc } from "firebase/firestore"
+import { db, storage } from "../../config/firebase"
 import TimeAgo from 'timeago-react';
 import { UseMedia } from "../../Context/MediaContext";
 import { UseBook } from "../../Context/BookContext";
 import { PopUp } from "../PopUp/PopUp";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import heartFill from "../../Images/heartfill.png"
+import { v4 as uuid } from 'uuid';
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import Picker from '@emoji-mart/react'
 
 
 export function UsersPost({post}){
@@ -22,6 +27,12 @@ export function UsersPost({post}){
     const [mypost, setMyPost] = useState(false)
     const {stories} = UseMedia()
     const[likesArray, setLikesArray] = useState([])
+    const [editing, setEditing] = useState(false);
+    const [editedContent, setEditedContent] = useState();
+    const[img, setImg] = useState(null)
+    const [input, setInput] = useState('');
+    const[error, setError] = useState(false)
+    const[showEmojis,setShowEmojis] = useState(false)
 
     const Images=["https://lens-storage.storage.googleapis.com/png/70da173dbc834b4bb6763d61497a247c", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjZctKcm1L8v17s92MaieFVgB8fs16dIWM57dcJFb8pA&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEMnPDKLXy-SPWsPheQfLol1dK8AbOB6zwG0L13lZ2Vg&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXFtTjGVfyndqQs4bXLI6irHKgXVByWQfogeq700rVsg&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2TyiRRZgppjo5cmgjSqiJq6zAO_X88bctaHC0VYAhxQ&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9ztZfLq32Qk3F5MCJK4FWSpqREyMbAzE4OKg6Iikowg&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPAfuGQCQ44JeIlccF0_BRXUcqA9neAEUToljuGD8NVg&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc3NeAIgnxIUPIhVmzmi9bti2cTxONWqsWZAzLCOpMMA&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKZlYHQHmTr290K_-x2omMfV_Xl4uZHtO7gOgrxKM5pw&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV6E1T3Nv6zcK3ZTir7i9OOvlm179rgbaqURNabbX81g&usqp=CAU&ec=48665701",  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3FrjxE6yQQQKp_hLvT_XV39lImu_FBkVqFjTPpKPkeg&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUU8CwvrQcAynZHVYTyCcQLVZkaXX921DGp0BRIKu1vA&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTOLYKINKxHLgMC0KQYHSy9ozTUas4GlH-n1J93EsS2w&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjvv7ziu1NxIkQ5WaD1PhtfbaMK18Vicl766BulAg10Q&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRq4kY52aeKW0wk-eX8HZePpNb73jn9z4s6WKZn6ON8Rg&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYPKNBy8z42-70ZRp_pcRtKUqvVFrfiaXnhg-1lq6WyQ&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlXEOQQWYTmsqOwMCjKL--2xoPBaDO5F6b6oV3b3pxqA&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl5keXx43rQwBatVYjCVkBJQpdQaVCkl3MdDywtCSxBw&usqp=CAU&ec=48665701"]
     
@@ -29,7 +40,7 @@ export function UsersPost({post}){
 
     const sortedComments = comment.sort((a,b) => b.data.timestamp - a.data.timestamp )
 
-    // console.log(Likes.sort((a,b) => a.length - b.length))
+
 
     useEffect(()=>{
         const unSub = onSnapshot(collection(db, "posts", post.id, "likes"),(snapshot) => setLikes(snapshot.docs.map((snapshot)=> ({
@@ -102,15 +113,13 @@ export function UsersPost({post}){
 
  
 
-    // const tagList = post.tags.map((tag) =>{return (<>{tag}</>)})
-
     const likePost = async() => {
         if(liked){
             await deleteDoc(doc(db, "posts", post.id , "likes", currentUser.uid))
             await updateDoc(doc(db, "posts", post.id), {
                 likes: Likes.length - 1
               });
-       
+              toast.info("UnLike the Post")
         }
         else{
             await setDoc(doc(db, "posts", post.id , "likes", currentUser.uid), {
@@ -123,10 +132,9 @@ export function UsersPost({post}){
             await updateDoc(doc(db, "posts", post.id), {
                 likes: Likes.length+1
               });
-       
+              toast.success("Liked the Post")
         }
     }
-
     const BookMark = async () => {
         if(BookMarked){
             await deleteDoc(doc(db, "users", currentUser.uid, "BookMarks", post.id))
@@ -146,7 +154,7 @@ export function UsersPost({post}){
     }
 
     const handleButtonClick = () => {
-        currentUser?.uid === post?.data?.uid ? setMyPost(true) : setMyPost(false)
+        currentUser?.uid === post?.uid ? setMyPost(true) : setMyPost(false)
         setPopupVisible(!isPopupVisible);
       };
 
@@ -164,36 +172,142 @@ export function UsersPost({post}){
          }
     }
 
-    console.log(post)
+
+    const handlePost =() =>{
+        setEditing(false)
+      }
+    const removeImage = () => {
+        setImg(null)
+    }
     
+    const handleKey = (e) => {
+        e.code === "Enter" && handleSubmit()
+    }
+    const handleSubmit =  () =>{
+        if(img){
+         const storageRef = ref(storage, "Posts/" + uuid());
+         
+         const uploadTask = uploadBytesResumable(storageRef, img);
+         
+         uploadTask.on(
+             'state_changed', 
+           (snapshot) => {
+             
+             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+             console.log('Upload is ' + progress + '% done');
+             switch (snapshot.state) {
+               case 'paused':
+                 console.log('Upload is paused');
+                 break;
+               case 'running':
+                 console.log('Upload is running');
+                 break;
+                 default: 
+                 console.log("some error occurred")
+             }
+           }, 
+           (error) => {
+             setError(true)
+           }, 
+           () => {
+             try{
+                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    updateDoc(doc(db, "posts", post.id), {
+                        uid: currentUser.uid,
+                        photoURL: currentUser.photoURL,
+                        displayName: currentUser.displayName,
+                        input,
+                        img: downloadURL,
+                        imgValue: getData?.data?.imgValue ? getData?.data?.imgValue : "",
+                        timestamp: serverTimestamp(),
+                        likes: 0
+                      });
+                       updateDoc(doc(db, "usersPosts", currentUser.uid),{
+                        messages: arrayUnion({
+                            id: uuid(),
+                            uid: currentUser.uid,
+                            photoURL: currentUser.photoURL,
+                            displayName: currentUser.displayName,
+                            input,
+                            img: downloadURL,
+                            imgValue: getData?.data?.imgValue ? getData?.data?.imgValue : "",
+                            timestamp: Timestamp.now(),
+                            likes: 0
+                        })
+                      }); 
+                });
+             }
+             catch(e){
+                 console.log(e)
+             }
+             
+           }
+         ); 
+        }
+        else{
+            updateDoc(doc(db, "posts", post.id), {
+             uid: currentUser.uid,
+             photoURL: currentUser.photoURL,
+             displayName: currentUser.displayName,
+             input,
+             imgValue: getData?.data?.imgValue ? getData?.data?.imgValue : "",
+             timestamp: serverTimestamp(),
+             likes: 1
+           });
+             updateDoc(doc(db, "usersPosts", currentUser.uid),{
+             messages: arrayUnion({
+                 id: uuid(),
+                 uid: currentUser.uid,
+                 photoURL: currentUser.photoURL,
+                 displayName: currentUser.displayName,
+                 input,
+                 imgValue: getData?.data?.imgValue ? getData?.data?.imgValue : "",
+                 timestamp: Timestamp.now(),
+                 likes: 1
+             })
+           });
+        }
+         setInput("");
+         setImg(null);
+         setEditing(false)
+     }
+
+     const addEmoji = (e) => {
+        let sym = e.unified.split("-");
+        let codesArray = [];
+        sym.forEach((el) => codesArray.push("0x" + el));
+        let emoji = String.fromCodePoint(...codesArray);
+        setInput(input + emoji);
+      };
+
     return(
         <div className="feed">
         <div className="head">
             <div className="user">
                 <div className="profile-photo">
-                    <img  src={post?.photoURL ? post?.photoURL : Images[post?.imgValue]} alt="feed-img"/>
+                    <Link to="/ProfilePage"><img  src={post?.data?.photoURL ? post?.data?.photoURL : Images[post?.data?.imgValue]} alt="feed-img"/></Link> 
                 </div>
                 <div className="ingo">
-                    <h3>{post?.displayName}</h3>
-                    <small>India,<TimeAgo datetime={new Date(post?.timestamp?.toDate()).toLocaleString()} locale='en'/></small>
+                <Link to="/ProfilePage"><h3>{post?.data?.displayName}</h3></Link>
+                    <small>India,<TimeAgo datetime={new Date(post?.data?.timestamp?.toDate()).toLocaleString()} locale='en'/></small>
                 </div>
             </div>
             <a className="edit"><span class="material-symbols-outlined" onClick={handleButtonClick}>more_horiz</span>
             {isPopupVisible && (
-            <PopUp onEdit={() =>handleEdit} onDelete={(e) => handleDelete()} mypost={mypost} />
+            <PopUp onEdit={() =>handleEdit()} onDelete={(e) => handleDelete()} mypost={mypost} />
             )}
             </a>
         </div>
         
-        <div className="postinputline">{post?.input}</div>
-        {post?.img && (
+        <div className="postinputline"><p style={{fontSize:"1.5rem"}}>{post?.data?.input}</p></div>
+        {post?.data?.img && (
                 <div className="photo">
-                <img src={post?.img} alt="feedImg"/>
+                <img src={post?.data?.img} alt="feedImg"/>
             </div>
         )}
         <div className="action-button">
             <div className="interaction-buttons">
-                <a onClick={(e)=> {likePost()}}><span class="material-symbols-outlined">favorite</span></a>
+                <a onClick={(e)=> {likePost()}}>{liked ? <span><img className="heartFill" src={heartFill} alt="heartFill"/></span>:<span class="material-symbols-outlined">favorite</span>}</a>
                 <a><span class="material-symbols-outlined" onClick={(e) => setCommentVisible(!commentVisible)}>add_comment</span></a>
                 <a><span class="material-symbols-outlined">share</span></a>
             </div>
@@ -209,7 +323,7 @@ export function UsersPost({post}){
             <p>Liked by <b>{}</b>and <b>{Likes.length} others</b></p>
         </div>
         <div className="caption">
-            <p><b>{post?.displayName}<br></br></b>{post?.input}<span className="harsh-tag">{}</span></p>
+            <p><b>{post?.data?.displayName}<br></br></b>{post?.data?.input}<span className="harsh-tag">{}</span></p>
         </div>
         <div className=" comments text-muted">View all {comment.length} comments</div>
         {commentVisible && <div><div className="commentbox" >
@@ -231,7 +345,62 @@ export function UsersPost({post}){
             </div>
            
         }
-        
+        {editing && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "70%",
+            height: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginLeft:"5rem"
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: "#fff",
+              padding: "20px",
+              borderRadius: "5px"
+            }}
+          >
+            <h1>Edit Post</h1>
+            <span class="material-symbols-outlined" onClick={handlePost} style={{marginLeft:"40rem", backgroundColor:"white",borderRadius:"50%",cursor:"pointer"}}>cancel</span>
+            <div className="create-post">
+           
+              <div className="post-wrapper">
+                <div className="post-profile-photo">
+                    { getData && <img src={currentUser.photoURL ?  currentUser.photoURL : Images[getData.data.imgValue]} alt="create-pic"/>}                    
+                    <input type="text"  placeholder={"What's happening  " + currentUser.displayName + "?"}  id="create-post" value={input} onChange={(e)=> setInput(e.target.value)} onKeyDown={handleKey}/>
+                </div>
+                {img && (
+                <div className="shareImgContainer">
+            <       img src={URL.createObjectURL(img)} alt="" className="shareImg" style={{width:"30%"}} />
+                    <span class="material-symbols-outlined" onClick={removeImage} style={{position:"absolute", top:"0", right:"32rem", backgroundColor:"white",borderRadius:"50%",cursor:"pointer"}}>cancel</span>
+                </div>
+                )}
+                <div className="postbtnOptions">
+                <div className="postOptions">
+                   <label> <input className="option" style={{display:"none"}}  type="file" id="file" accept=".png,.jpeg,.jpg" onChange={(e) => setImg(e.target.files[0])} /><span class="material-symbols-outlined" style={{color:"var(--photo)", marginTop:"0.5rem"}}>image</span></label>
+                    <div className="option" style={{color:"var(--video)"}}><span class="material-symbols-outlined">smart_display</span></div>
+                    <div className="option" style={{color:"var(--location)"}} onClick={() => setShowEmojis(!showEmojis)}><span class="material-symbols-outlined">add_reaction</span></div>
+                    <div className="option" style={{color:"var(--schedule)"}}><span class="material-symbols-outlined">calendar_month</span></div>
+                </div>
+                <input type="submit" onClick={handleSubmit}  className="btn btn-primary postbtn"/>
+                </div>
+            </div>
+            {showEmojis && (
+          <div className="emoji">
+            <Picker onEmojiSelect={addEmoji} />
+          </div>
+        )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
 
 

@@ -20,7 +20,7 @@ export function HomePage(){
             <div className="left">
                 <a className="profile" href="/ProfilePage">
                     <div className="profile-photo">
-                    {getData && <img className="imgHome" src={currentUser.photoURL ?  currentUser.photoURL : Images[getData.data.imgValue]} alt=""/>}
+                    {getData && <img className="imgHome" src={getData?.data?.photoURL ?  getData?.data?.photoURL : Images[getData.data.imgValue]} alt=""/>}
                     </div>
                     <div className="handle">
                         <h4>{currentUser.displayName}</h4>

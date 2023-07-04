@@ -13,6 +13,7 @@ import { Explore } from './Pages/Explore/Explore';
 import { UserDetails } from './components/UserDetails/UserDetails';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { UserProfiles } from './components/UserProfiles/UserProfiles';
 
 
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/ProfilePage" element={<RequiresAuth><ProfilePage/></RequiresAuth>}/>
           <Route path="/EditProfile" element={<RequiresAuth><Editprofile/></RequiresAuth>}/> 
           <Route path="/Explore" element={<RequiresAuth><Explore/></RequiresAuth>}/> 
+          <Route path="/UserProfiles" element={<RequiresAuth><UserProfiles/></RequiresAuth>}/> 
         </Route>
       </Routes>
       <ToastContainer position='bottom-right'

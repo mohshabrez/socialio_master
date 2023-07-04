@@ -1,6 +1,11 @@
+.profilePageSection{
+    display: grid;
+    grid-template-columns: 300px 1fr;
+}
 .profilePage{
     display: grid;
     grid-template-rows: 1fr 2fr 11fr;
+    margin-left: -10rem;
 }
 
 .profilePage .profileImg {
@@ -56,7 +61,7 @@
 
 
 .profile-btns button{
-    margin-right: 6rem;
+    margin-right: 3rem;
     position: relative;
 }
 
