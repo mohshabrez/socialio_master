@@ -106,6 +106,7 @@
 .ontune{
     margin-left:40rem;
     margin-top: 1rem;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 768px){

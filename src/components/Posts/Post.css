@@ -52,6 +52,7 @@
     align-items: center;
     font-size: 1.4rem;
     margin: 0.6rem;
+    cursor: pointer;
 }
 
 .interaction-buttons span{

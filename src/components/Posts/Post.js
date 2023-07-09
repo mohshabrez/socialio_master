@@ -308,7 +308,7 @@ export function Post({post}){
                     <small>India,<TimeAgo datetime={new Date(post?.data?.timestamp?.toDate()).toLocaleString()} locale='en'/></small>
                 </div>
             </div>
-            <a className="edit"><span class="material-symbols-outlined" onClick={()=>handleButtonClick()}>more_horiz</span>
+            <a className="edit"><span class="material-symbols-outlined" onClick={()=>handleButtonClick()} style={{cursor:"pointer"}}>more_horiz</span>
             {isPopupVisible && (
             <PopUp onEdit={() =>handleEdit(post)} onDelete={(e) => handleDelete()} unFollow={()=> handleProfile(post)} mypost={mypost} />
             )}
