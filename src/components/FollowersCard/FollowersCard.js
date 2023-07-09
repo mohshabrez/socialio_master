@@ -17,6 +17,8 @@ export function FollowersCard({user}){
     const getData = stories.find((story) => story.id === currentUser.uid)
     const navigate = useNavigate()
 
+    let post = user
+
     useEffect(()=>{
         const unSub = onSnapshot(collection(db, "users", currentUser.uid, "Followers"),(snapshot) => setFollowers(snapshot.docs.map((snapshot)=> ({
             id: snapshot.id,
@@ -66,14 +68,19 @@ export function FollowersCard({user}){
               });
               toast.success(`You Followed ${user?.data?.displayName}`)
         }
+        
     }
 
+
+    const handleProfile = () => {
+        navigate("/UserProfiles", {state:{post}})
+      }
 
     return(
         <>
         <div className="FollowersCard">
                     <div className="follower">
-                        <div>
+                        <div onClick={handleProfile}>
                             <img className="followerImg" src={user?.data?.photoURL ? user?.data?.photoURL : Images[user?.data?.imgValue]}  alt="profilepic"/>
                             <div className="name">
                                 <span>{user?.data?.displayName}</span>

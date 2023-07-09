@@ -52,6 +52,13 @@
     left: 230px;
     color: #14B0AD;
   }
+
+  .LoginData .errorSpan{
+    margin-top: 1rem;
+    margin-left: -12rem;
+    color: red;
+    font-size: large;
+  }
   
   .LoginData div{
     display: flex;

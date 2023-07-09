@@ -25,21 +25,21 @@
     margin-top: 1rem;
 }
 
-.profilePage .profileImg .profileInfo{
+.profilePage .profileImg .profileInfoo{
     display: flex;
     flex-direction: row;
     margin: 1rem;
 }
 
-.profileInfo div{
+.profileInfoo div{
    margin-left: 10rem;
 }
 
-.profileInfo p {
+.profileInfoo p {
     display: block;
 }
 
-.profileInfo .postsCount{
+.profileInfoo .postsCount{
     margin-left: 11rem;
 }
 

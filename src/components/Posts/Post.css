@@ -35,6 +35,12 @@
     margin: 20px;
 }
 
+.feed .photo video{
+    width: 96%;
+    height: 100%;
+    margin: 20px;
+}
+
 .feed .user .profile-photo{
     border: 3px solid var(--color-primary);
     border-radius: 50%;

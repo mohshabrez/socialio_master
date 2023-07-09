@@ -8,8 +8,14 @@ export function Signup(){
     const[error, setError] = useState(false)
     const[showPassword, setShowPassword] = useState(false)
     const[confirmshowPassword, setconfirmShowPassword] = useState(false)
+    const[confirmPswrd, setConfirmPswrd] = useState('')
     const[singUpValues, setSignUpValues] = useState({displayName:"", Email:"", Pswrd:""})
+    const[isButtonDisabled, setIsButtonDisabled] = useState(false)
 
+    setTimeout(() => {
+      setIsButtonDisabled(singUpValues.displayName === '' && singUpValues.Email === '' && singUpValues.Pswrd === '' && singUpValues.Pswrd.toLowerCase() === confirmPswrd.toLowerCase())
+    }, 2000);
+    
 
     const handleChange = (key, value) => {
         setSignUpValues(prevState => ({
@@ -32,6 +38,10 @@ export function Signup(){
         setconfirmShowPassword(!confirmshowPassword)
     }
 
+  
+    console.log(isButtonDisabled)
+
+
     return(
         <>
         <div className="signUp">
@@ -51,21 +61,22 @@ export function Signup(){
                     <div >
                         <div>
                             <label>Enter Your Name*</label>
-                            <input type="text" placeholder="UserName" required onChange={(e) => handleChange('displayName', e.target.value)}/><span class="material-symbols-outlined" style={{ top:"-27px",left:"220px"}}>account_circle</span>
+                            <input type="text" placeholder="UserName" required  onChange={(e) => handleChange('displayName', e.target.value)} style={{border: singUpValues.displayName === '' ? "2px solid #DE3163" : "" }}/><span class="material-symbols-outlined" style={{ top:"-27px",left:"220px"}}>account_circle</span>
                         </div>
                         <div>
                             <label>Enter Your Email*</label>
-                            <input type="text" placeholder="test@gmail.com" required  onChange={(e) => handleChange('Email', e.target.value)}/><span class="material-symbols-outlined" style={{ top:"-27px",left:"220px"}}>drafts</span>
+                            <input type="text" placeholder="test@gmail.com" required  onChange={(e) => handleChange('Email', e.target.value)} style={{border: singUpValues.Email === '' ? "2px solid #DE3163" : "" }}/><span class="material-symbols-outlined" style={{ top:"-27px",left:"220px"}}>drafts</span>
                         </div>
                         <div>
                             <label>Enter Your Password*</label>
-                            <input type={showPassword ? 'text' : 'password'} placeholder="Password" minLength={6} required onChange={(e) => handleChange('Pswrd', e.target.value)}/><span class="material-symbols-outlined" style={{top:"-27px", left:"220px"}} onClick={()=>showPasswordvisible()}>{showPassword ? 'visibility_off' :'visibility'}</span> 
+                            <input type={showPassword ? 'text' : 'password'} placeholder="Password" minLength={6} required onChange={(e) => handleChange('Pswrd', e.target.value)} style={{border: singUpValues.Pswrd === '' ? "2px solid #DE3163" : "" }}/><span class="material-symbols-outlined" style={{top:"-27px", left:"220px"}} onClick={()=>showPasswordvisible()}>{showPassword ? 'visibility_off' :'visibility'}</span> 
                         </div>
                         <div>
                             <label>Confirm Password Again*</label>
-                            <input type={confirmshowPassword ? 'text' : 'password'} placeholder="Confirm Password" required /><span class="material-symbols-outlined" style={{top:"-27px", left:"220px"}} onClick={()=>confirmShowpswrdVisible()}>{confirmshowPassword ? 'visibility_off' :'visibility'}</span> 
+                            <input type={confirmshowPassword ? 'text' : 'password'} placeholder="Confirm Password" required onChange={(e)=> setConfirmPswrd(e.target.value)} /><span class="material-symbols-outlined" style={{top:"-27px", left:"220px"}} onClick={()=>confirmShowpswrdVisible()}>{confirmshowPassword ? 'visibility_off' :'visibility'}</span> 
                         </div>
-                        <button style={{marginLeft:"40px"}} value="Sign Up"  onClick={handleCreate}>Create a New Account</button>
+                        <button style={{marginLeft:"40px"}} value="Sign Up" disabled={isButtonDisabled} onClick={handleCreate}>Create a New Account</button>
+                        {isButtonDisabled && <p className="formerror">Please fill or check the above fields</p> }
                         <p style={{marginLeft:"30px", marginTop:"20px"}}>Already have an Account<Link to="/login" className="signInLink">  Sign In</Link></p>
                     </div>
                         {error && <span className="error" style={{color:"red"}}>Something went wrong</span>}

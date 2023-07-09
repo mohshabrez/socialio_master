@@ -143,7 +143,12 @@ const addEmoji = (e) => {
   let emoji = String.fromCodePoint(...codesArray);
   setInput(input + emoji);
 };
- 
+
+const handleSearch = () => {
+  toast.info("Inprogress Feautre development")
+}
+
+
     return(
         <>
          <div className="root-layout">
@@ -154,14 +159,14 @@ const addEmoji = (e) => {
             <Link to="/HomePage"><h2 className="log">Socialio</h2></Link>
             <div className="search-bar">
             <span class="material-symbols-outlined">search</span>
-                <input type="search" placeholder="search for"/>
+                <input type="search" placeholder="search for" onClick={handleSearch}/>
             </div>
             <div className="create">
                 <label className="btn btn-primary postbtnnav" for="create-post" onClick={handleCreate}>Create</label>
                 <Link to="/ProfilePage"><div className="profile-photo">
                    {getData && <img src={getData?.data?.photoURL ?  getData?.data?.photoURL : Images[getData.data.imgValue]} alt=""/>}
                 </div></Link>
-                <span class="material-symbols-outlined" onClick={logoutClick}>logout</span>
+                <span class="material-symbols-outlined" style={{cursor: "pointer"}} onClick={logoutClick}>logout</span>
             </div>
           </div>
           {editing && (
@@ -192,7 +197,7 @@ const addEmoji = (e) => {
            
               <div className="post-wrapper">
                 <div className="post-profile-photo">
-                    { getData && <img src={getData?.data?.photoURL ?  getData?.data?.photoURL : Images[getData.data.imgValue]} alt="create-pic"/>}                    
+                    {getData && <img src={getData?.data?.photoURL ?  getData?.data?.photoURL : Images[getData.data.imgValue]} alt="create-pic"/>}                    
                     <input type="text"  placeholder={"What's happening  " + currentUser.displayName + "?"}  id="create-post" value={input} onChange={(e)=> setInput(e.target.value)} onKeyDown={handleKey}/>
                 </div>
                 {img && (

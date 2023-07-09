@@ -1,9 +1,11 @@
+import { useLocation } from "react-router-dom";
 import { UseAuth } from "../../Context/AuthContext";
 import "./PopUp.css"
 import React, { useState } from 'react';
 
 export function PopUp({onEdit, onDelete, mypost, unFollow}){
     const {currentUser} = UseAuth()
+
 
     return (
        <>
@@ -14,7 +16,7 @@ export function PopUp({onEdit, onDelete, mypost, unFollow}){
         <button onClick={onDelete}>Delete</button>
       </div>
        ) : (<div className="popupsecond">
-       <button onClick={unFollow}>UnFollow</button>
+       <button onClick={unFollow}>profile</button>
      </div>)}
        </>
         

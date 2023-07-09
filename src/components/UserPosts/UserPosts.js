@@ -154,7 +154,7 @@ export function UsersPost({post}){
     }
 
     const handleButtonClick = () => {
-        currentUser?.uid === post?.uid ? setMyPost(true) : setMyPost(false)
+        currentUser?.uid === post?.uid ? setMyPost(false) : setMyPost(true)
         setPopupVisible(!isPopupVisible);
       };
 
@@ -304,6 +304,11 @@ export function UsersPost({post}){
                 <div className="photo">
                 <img src={post?.data?.img} alt="feedImg"/>
             </div>
+        )}
+        {post?.data?.video && (
+           <div className="photo">
+            <video src= {post?.data?.video} controls autoPlay loop/>
+          </div>
         )}
         <div className="action-button">
             <div className="interaction-buttons">

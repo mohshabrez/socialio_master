@@ -31,11 +31,6 @@ export function LoginPage(){
         }
 
 
-//   const handleClick = (e) => {
-//     setCredentials(e);
-//     if (isAuth) navigate(location?.state?.from?.pathname)
-//   };
-
 const confirmShowpswrdVisible = () => {
     setconfirmShowPassword(!confirmshowPassword)
 }
@@ -64,10 +59,9 @@ const confirmShowpswrdVisible = () => {
                         <input type={confirmshowPassword ? 'text' : 'password'} className="pwd" placeholder="********" name="password" value={password} /><span class="material-symbols-outlined" style={{top:"-27px", left:"220px"}} onClick={()=>confirmShowpswrdVisible()}>{confirmshowPassword ? 'visibility_off' :'visibility'}</span> 
                     </div>
                     <button type="submit" value="Sign In" className="btn primary" >Sign In</button>
-                    {/* <button type="submit" value="Test User" className="btn primary" >Login With Test Credentials</button> */}
                     
                     <p style={{marginLeft:"10px", color:"black", padding:"15px"}}>Don't have an Account?<Link to="/SignUp" style={{color:"#14B0AD"}}>  Sign Up</Link></p>
-                    {error && <span>Something went wrong</span>}
+                    {error && <span className="errorSpan">Something went wrong</span>}
                 </form>
                 </div>
             </div>

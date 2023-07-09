@@ -14,6 +14,7 @@ import { UserDetails } from './components/UserDetails/UserDetails';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { UserProfiles } from './components/UserProfiles/UserProfiles';
+import { PopUp } from './components/PopUp/PopUp';
 
 
 
@@ -33,10 +34,11 @@ function App() {
           <Route path="/EditProfile" element={<RequiresAuth><Editprofile/></RequiresAuth>}/> 
           <Route path="/Explore" element={<RequiresAuth><Explore/></RequiresAuth>}/> 
           <Route path="/UserProfiles" element={<RequiresAuth><UserProfiles/></RequiresAuth>}/> 
+          <Route path="/PopUp" element={<RequiresAuth><PopUp/></RequiresAuth>}/> 
         </Route>
       </Routes>
       <ToastContainer position='bottom-right'
-        autoClose={5000}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

@@ -33,6 +33,9 @@ export function Post({post}){
     const [editInput, setEditInput] = useState(post?.data?.input)
     const[error, setError] = useState(false)
     const navigate = useNavigate()
+    const[Followed, setFollowed] = useState() 
+    const[followers, setFollowers] = useState([])
+    const[following, setFollowing] = useState(false)
    
 
     const Images=["https://lens-storage.storage.googleapis.com/png/70da173dbc834b4bb6763d61497a247c", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjZctKcm1L8v17s92MaieFVgB8fs16dIWM57dcJFb8pA&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEMnPDKLXy-SPWsPheQfLol1dK8AbOB6zwG0L13lZ2Vg&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXFtTjGVfyndqQs4bXLI6irHKgXVByWQfogeq700rVsg&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2TyiRRZgppjo5cmgjSqiJq6zAO_X88bctaHC0VYAhxQ&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9ztZfLq32Qk3F5MCJK4FWSpqREyMbAzE4OKg6Iikowg&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPAfuGQCQ44JeIlccF0_BRXUcqA9neAEUToljuGD8NVg&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc3NeAIgnxIUPIhVmzmi9bti2cTxONWqsWZAzLCOpMMA&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKZlYHQHmTr290K_-x2omMfV_Xl4uZHtO7gOgrxKM5pw&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV6E1T3Nv6zcK3ZTir7i9OOvlm179rgbaqURNabbX81g&usqp=CAU&ec=48665701",  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3FrjxE6yQQQKp_hLvT_XV39lImu_FBkVqFjTPpKPkeg&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUU8CwvrQcAynZHVYTyCcQLVZkaXX921DGp0BRIKu1vA&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTOLYKINKxHLgMC0KQYHSy9ozTUas4GlH-n1J93EsS2w&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjvv7ziu1NxIkQ5WaD1PhtfbaMK18Vicl766BulAg10Q&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRq4kY52aeKW0wk-eX8HZePpNb73jn9z4s6WKZn6ON8Rg&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYPKNBy8z42-70ZRp_pcRtKUqvVFrfiaXnhg-1lq6WyQ&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlXEOQQWYTmsqOwMCjKL--2xoPBaDO5F6b6oV3b3pxqA&usqp=CAU&ec=48665701", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl5keXx43rQwBatVYjCVkBJQpdQaVCkl3MdDywtCSxBw&usqp=CAU&ec=48665701"]
@@ -274,10 +277,7 @@ export function Post({post}){
         e.code === "Enter" && handleSubmit()
     }
 
-    const handleUnfollow = (e) => {
-
-    }
-
+ 
     const addEmoji = (e) => {
         let sym = e.unified.split("-");
         let codesArray = [];
@@ -290,6 +290,10 @@ export function Post({post}){
     const handleProfile = () => {
       navigate("/UserProfiles", {state:{post}})
     }
+
+    setTimeout(() => {
+      setPopupVisible(false)
+    }, 8000);
 
 
     return(
@@ -304,9 +308,9 @@ export function Post({post}){
                     <small>India,<TimeAgo datetime={new Date(post?.data?.timestamp?.toDate()).toLocaleString()} locale='en'/></small>
                 </div>
             </div>
-            <a className="edit"><span class="material-symbols-outlined" onClick={handleButtonClick}>more_horiz</span>
+            <a className="edit"><span class="material-symbols-outlined" onClick={()=>handleButtonClick()}>more_horiz</span>
             {isPopupVisible && (
-            <PopUp onEdit={() =>handleEdit(post)} onDelete={(e) => handleDelete()} unFollow={(e)=> handleUnfollow()} mypost={mypost} />
+            <PopUp onEdit={() =>handleEdit(post)} onDelete={(e) => handleDelete()} unFollow={()=> handleProfile(post)} mypost={mypost} />
             )}
             </a>
         </div>
@@ -316,6 +320,11 @@ export function Post({post}){
                 <div className="photo">
                 <img src={post?.data?.img} alt="feedImg"/>
             </div>
+        )}
+        {post?.data?.video && (
+           <div className="photo">
+            <video src= {post?.data?.video} controls autoPlay loop/>
+          </div>
         )}
         <div className="action-button">
             <div className="interaction-buttons">

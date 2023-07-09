@@ -26,6 +26,17 @@
     border-radius: 50%;
 }
 
+.userprofile .profImg{
+    width: 6rem;
+    height: 6rem;
+    margin: 0.8rem;
+    cursor: pointer;
+    border-radius: 50%;
+    position: relative;
+    left: 13rem;
+    top: -39rem;
+}
+
 .UserDesign .AvtarImgs img:hover{
     transform: scale(2.0);
 }
@@ -86,7 +97,33 @@
     margin-right: -4rem ;
 }
 
-.profileInfo h1{
+.profileInfo{
+    display: flex;
+    flex-direction: column;
+    line-height: 2rem;
+    position: relative;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    top: -39rem;
+    left: -1rem;
+}
+
+.profileInfo p{
+  width: 48%;
+  position: relative;
+  left: -2rem;
+}
+
+.formerrorr{
+    margin-top: 1rem;
+    margin-left: 10rem;
+    font-size: larger;
+    color: red;
+}
+
+
+/* .profileInfo h1{
     position: relative;
     top: -31rem;
     left: 11rem;
@@ -118,7 +155,7 @@
 .profileInfo .phno{
     margin-left: -2rem;
     margin-top: 1rem;
-}
+} */
 
 .upload-file{
     position: relative;
