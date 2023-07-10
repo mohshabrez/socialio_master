@@ -107,4 +107,5 @@ $ npm start
 
 ## Vimeo Video of The Website -
 
-[![Socialio]<img width="898" alt="Screenshot 2023-06-06 062923" src="https://github.com/mohshabrez/TravLo-E-Commerce/assets/31725739/c6adb952-e82d-43b6-a8aa-5b63716c8804">](https://vimeo.com/843883512/9b5198fcce)
+[![Socialio]<img width="956" alt="image" src="https://github.com/mohshabrez/socialio_master/assets/31725739/dbc4b02f-28e0-4e31-b26f-7e57191d1d8e">
+](https://vimeo.com/843883512/9b5198fcce)
