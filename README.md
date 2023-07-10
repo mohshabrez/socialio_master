@@ -23,59 +23,88 @@ $ npm start
 
 ## Feauters and Pages
 
-### Landing Page
-
-#### The Page Consists of:
-
-- A Slide Show
-- A Category section with Best Sellers Categoories
-
-### Product Listing
-#### Here you can:
-
-- View the products available
-- Sort them according to price
-- Filter them by category, price range, star rating, and many more.
-- Clear filters
-- Add/Remove to/from wishlist
-- Add to cart
 
 ### Signin/Signup Page:
 #### Signin/Signup to your account
-- go to signup/signin if account not created or user already exists
-- show/hide password
+
+- can see a sign-up page from where I can sign-up using my email, first name, last name, user name, password & confirm password.
+- I can see a hide-show icon button that shows or hides my password.
+
+#### Create profile Page
+
+- creating a profile with adding image, name, bio, age, number, portfolio
+- If you dont want to add image, gave an avtar's as optional and default avatar if not set any.
+
+### Login Page:
+
+- I can see a login page from where I can log in using my email & password.
+
+### User Feed
+
+#### The Page Consists of:
+
+- landing page with a list of user posts.
+- Sort & Filter by Date, Trending
+- List of stories with arrow buttons to change and check
+- profile card which shows name,bio,followers and following with a link to profile page
+- Accounts to follow and connect with new people
+- Right navBar with basic components
+
+### Create a Post
+#### Here you can:
+
+-  create a post with a  "Create" button which will open a text box and will have a "Post" or "Submit" button.
+-  You can use the component of post creation textarea also
+- can upload and add images and videos while creating a post.
+- can add emojis and gifs while creating a post.
 
 
-### Cart
-- increase/decrease number of items
-- remove from cart
-- add to wishlist
-- get the total sum and discount
--  Check box 
+### Like, Edit, Delete, comment a Post
 
-### CheckBox
+- can give a heart or thumbs up to any post on the user feed
+- click on the "Edit Post" button which will open the same component with the text box where we can edit a post & save it. I should be able to edit only my post.
+- click on the "Delete Post" button which will delete a post. I should be able to delete only my post.
 
-- Address Managment
-- Adding , editing, deleting of Address
-- Order summary and checkout Tab
-- Order details with proper calculations of discounts etcc...
+###  Follow/Unfollow
 
-### Wishlist
+-When I click the user profile, I can see a "Follow" button, if I click on it, I can follow the user.
+- If clicked again on the same button, I will "unfollow" the same user.
 
-- Remove from wishlist
-- Add to cart
+### Explore Feed
 
-### Search
-- You can search any product you want based on
+- When I click on Explore feed I can see all the posts, even of the people whom I don't follow.
+
+
+### Bookmark Post
+
+- For every post on the user feed, I can see a "Bookmark" option where I can bookmark a post which will add it to the bookmark list.
+
+### Profile Page
+
+- User profile page where you can user's info , posts , followers and followings with editing profile option.
+
+### Edit Profile
+
+- You can edit the profile in two ways.
+- one, without entering password you can change any single detail or add up a picture or avatar.
+- Two, If you change mail n password - Page navigates to login again as authentication process.
+
+### User's profile
+
+-You can navigate to any user's profile by clicking on image or their name
+
+### Logout
+
+- I can see a logout button from where I can log out from the app on the header navbar.
 
 ### Built with -
 - React JS
 - React Context API + useReducer
 - React Router v6
 - Pure CSS
-- Razorpay payment gateway
+- Backend - FireBase
 
 
-## Loom Video of The Website -
+## Vimeo Video of The Website -
 
-[![TravLo.co]<img width="898" alt="Screenshot 2023-06-06 062923" src="https://github.com/mohshabrez/TravLo-E-Commerce/assets/31725739/c6adb952-e82d-43b6-a8aa-5b63716c8804">](https://www.loom.com/share/276b45e3098240b29a7554a20fbb79bc)
+[![Socialio]<img width="898" alt="Screenshot 2023-06-06 062923" src="https://github.com/mohshabrez/TravLo-E-Commerce/assets/31725739/c6adb952-e82d-43b6-a8aa-5b63716c8804">](https://vimeo.com/843883512/9b5198fcce)
