@@ -8,6 +8,14 @@
    
 }
 
+.left .designer{
+    rotate: 90deg;
+    position: relative;
+    left: -8.5rem;
+    top: -1rem;
+    font-weight: bold;
+}
+
 .left .sidebar a {
     font-weight: 700;
     color: gray;

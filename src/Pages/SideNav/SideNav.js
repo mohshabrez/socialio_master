@@ -16,6 +16,7 @@ export function SideNav(){
 
     return(
         <div className="left">
+            <p className="designer">Designed by <a style={{color:"hsl(252, 75%, 60%)"}} href="https://shabrezs-port.netlify.app/" target="_blank" rel="noreferrer">Shabrez</a></p>
         <div className="sidebar">
             <a className="menu-item" href="/HomePage">
                 <span class="material-symbols-outlined">home</span><h3>Home</h3>
