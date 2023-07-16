@@ -104,8 +104,6 @@ export function Editprofile(){
                   birthday: data.birthday ? data.birthday : getData?.data?.birthday,
                   bio: data.bio ? data.bio : getData?.data?.bio,
                   portfolio: data.portfolio ? data.portfolio : getData?.data?.portfolio,
-                  followers: data.followers ? data.followers: getData?.data?.followers,
-                  following: data.following ? data.following : getData?.data?.following,
                   createdAt: serverTimestamp(),
                   handleAvatar: imgValue
                 });
@@ -140,8 +138,6 @@ export function Editprofile(){
             birthday: data.birthday ? data.birthday : getData?.data?.birthday,
             bio: data.bio ? data.bio : getData?.data?.bio,
             portfolio: data.portfolio ? data.portfolio : getData?.data?.portfolio,
-            followers: data.followers ? data.followers: getData?.data?.followers,
-            following: data.following ? data.following : getData?.data?.following,
             imgValue: imgValue,
             createdAt: serverTimestamp(),
             photoURL: "",
@@ -249,7 +245,7 @@ export function Editprofile(){
                     <a className="rightarrow"><span class="material-symbols-outlined" style={{fontSize:"300%"}} onClick={nextSlide} disabled={startIndex + 4 >= Images.length}>keyboard_double_arrow_right</span></a>
                 </div>
                 <div className="EditForm">
-                    <form className="formElements" onSubmit={handleSubmit}>
+                    <form className="formElements">
                         <label> User Name</label>
                             <input type="text" name="userName" placeholder="" value={data.userName} onChange={handleChange} />
                         
@@ -271,7 +267,7 @@ export function Editprofile(){
                         <label>Old Password</label>
                             <input type="password" name="Oldpassword" placeholder=""  onChange={handleChange}/>
                         <div className="form-btns">
-                            <button className="btn btn-primary" type="submit">Save</button>
+                            <button className="btn btn-primary" type="submit" onClick={handleSubmit}>Save</button>
                             <button className="btn btn-primary" onClick={handleCancel}>Cancel</button>
                         </div>
                         

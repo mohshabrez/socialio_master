@@ -32,7 +32,9 @@ export function MiddleNav(){
       setInput(input + emoji);
     };
 
-    const handleSubmit =  () =>{
+    const handleSubmit =  (e) =>{
+      e.preventDefault()
+
        if(img){
         const storageRef = ref(storage, "Posts/" + uuid());
         
@@ -93,7 +95,7 @@ export function MiddleNav(){
           }
         ); 
        }
-       if(video){
+       else if(video){
         const storageRef = ref(storage, "Posts/" + uuid());
         
         const uploadTask = uploadBytesResumable(storageRef, video);
@@ -199,6 +201,16 @@ export function MiddleNav(){
       setShowEmojis(false)
     },20000);
 
+    const handleImage = (e) => {
+      setVideo(null)
+      setImg(e.target.files[0])
+    }
+
+    const handleVideo = (e) => {
+      setImg(null)
+      setVideo(e.target.files[0])
+    }
+
 
     return(
         <>
@@ -212,8 +224,7 @@ export function MiddleNav(){
                 {img && (
                 <div className="shareImgContainer">
                 <img src={URL.createObjectURL(img)} alt="" className="shareImg" />
-                <video src={URL.createObjectURL(img)} controls autoPlay/>
-                    <span class="material-symbols-outlined" onClick={removeImage} style={{position:"absolute", top:"0", right:"20px", backgroundColor:"white",borderRadius:"50%",cursor:"pointer"}}>cancel</span>
+                <span class="material-symbols-outlined" onClick={removeImage} style={{position:"absolute", top:"0", right:"20px", backgroundColor:"white",borderRadius:"50%",cursor:"pointer"}}>cancel</span>
                 </div>
                 )}
                 {video && (
@@ -224,8 +235,8 @@ export function MiddleNav(){
                 )}
                 <div className="postbtnOptions">
                 <div className="postOptions">
-                   <label> <input className="option" style={{display:"none"}}  type="file" id="file" accept=".png,.jpeg,.jpg,.mp4" onChange={(e) => setImg(e.target.files[0])} /><span class="material-symbols-outlined" style={{color:"var(--photo)", marginTop:"0.5rem", cursor:"pointer"}}>image</span></label>
-                    <label><input className="option" style={{display:"none"}}  type="file" id="file" accept=".mp4" onChange={(e) => setVideo(e.target.files[0])}/><span class="material-symbols-outlined" style={{color:"var(--video)", marginTop:"0.5rem", cursor:"pointer"}}>smart_display</span></label>
+                   <label> <input className="option" style={{display:"none"}}  type="file" id="file" accept=".png,.jpeg,.jpg,.mp4" onChange={(e) => handleImage(e)} /><span class="material-symbols-outlined" style={{color:"var(--photo)", marginTop:"0.5rem", cursor:"pointer"}} >image</span></label>
+                    <label><input className="option" style={{display:"none"}}  type="file" id="file" accept=".mp4" onChange={(e) => handleVideo(e)}/><span class="material-symbols-outlined" style={{color:"var(--video)", marginTop:"0.5rem", cursor:"pointer"}}>smart_display</span></label>
                     <div className="option" style={{color:"var(--location)"}} onClick={() => setShowEmojis(!showEmojis)}><span class="material-symbols-outlined">add_reaction</span></div>
                     <div className="option" style={{color:"var(--schedule)"}}><span class="material-symbols-outlined">calendar_month</span></div>
                 </div>
